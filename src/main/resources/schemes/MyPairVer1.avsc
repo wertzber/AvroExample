@@ -1,6 +1,7 @@
 {
+    "namesapce": "com.elad",
     "type": "record",
-    "name": "wpmcn.MyPair",
+    "name": "com.elad.wpmcn.MyPair",
     "doc": "A pair of strings",
     "fields": [
         {"name": "left", "type": "string"},
