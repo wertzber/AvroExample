@@ -18,9 +18,27 @@ exercise 1
     ]
 }
 
-2. write a stream as GenericRecord(ex1-file-generic)
+2. write a stream as GenericRecord
   
    read stream with GenericReader
-   read stream with mypair
+   read stream with specificDatumReader
       
+3. write a stream as SpecificDatumWriter
+     
+   read stream with GenericReader
+   read stream with specificDatumReader
 
+you can see the output is the same.
+
+4. write a bin file for later test: MyPairOutput-V1.bin
+
+5. read the file using: SpecificDatumReader
+
+note 1:
+when reading the bin file:
+        "right".equalsIgnoreCase((String) myPair.getRight())); - this cause an exception:
+
+java.lang.ClassCastException: org.apache.avro.util.Utf8 cannot be cast to java.lang.String
+
+In order to solve it you should use the toString(), meaning myPair.getRight().toString()
+same issue also happen when using a generic record and result.get("left").

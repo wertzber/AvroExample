@@ -1,11 +1,15 @@
 package com.elad.wpmcn;
 
 import org.apache.avro.Schema;
+import org.apache.avro.file.DataFileReader;
 import org.apache.avro.file.DataFileWriter;
+import org.apache.avro.file.FileReader;
 import org.apache.avro.generic.GenericData;
+import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericDatumWriter;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.*;
+import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.apache.avro.util.Utf8;
 
@@ -25,12 +29,12 @@ public class AvroUtils {
 
     /**
      * Serialize and create stream using genericDatumReader
-     * @param schema
      * @param datum
+     * @param writer
+
      * @throws IOException
      */
-    public  static <T> ByteArrayOutputStream serializeCreateByteStreamUsingDatumWriter(Schema schema,
-                                    T datum, DatumWriter<T> writer) throws IOException {
+    public  static <T> ByteArrayOutputStream serializeCreateByteStreamUsingDatumWriter(T datum, DatumWriter<T> writer) throws IOException {
         // Serialize it.
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Encoder encoder = EncoderFactory.get().binaryEncoder(out, null);
@@ -45,21 +49,60 @@ public class AvroUtils {
         }
     }
 
-    public static <R> R deserializeByteStreamUsingDatumReader(ByteArrayOutputStream out, Schema schema, DatumReader<R> reader) throws IOException {
+    public static <R> R deserializeByteStreamUsingDatumReader(ByteArrayOutputStream out, DatumReader<R> reader) throws IOException {
 
         Decoder decoder = DecoderFactory.get().binaryDecoder(out.toByteArray(), null);
         try{
             return reader.read(null, decoder);
-
         } catch (Exception e){
             out.close();
             return  null;
         }
     }
 
-    public static void createFile(){
-
+    /**
+     * Create a bin file
+     * @param datum
+     * @param directory
+     * @param fileName
+     * @throws IOException
+     */
+    public static void createFile(com.elad.wpmcn.MyPair datum,String directory, String fileName) throws IOException {
+        Path path = Paths.get(directory, fileName) ;
+        Path tmpFile = null;
+        if(!Files.isReadable(path)){
+            tmpFile = Files.createFile(path);
+            System.out.println("Create a file " + path.getFileName());
+        } else {
+            tmpFile = path;
+        }
+        // Serialize it.
+        DataFileWriter<com.elad.wpmcn.MyPair> writer = new DataFileWriter<com.elad.wpmcn.MyPair>
+                (new SpecificDatumWriter<com.elad.wpmcn.MyPair>(com.elad.wpmcn.MyPair.class));
+        writer.create(SCHEMA$, tmpFile.toFile()); //use the built in scheme
+        writer.append(datum);
+        writer.close();
+        System.out.println("Serialization: " + tmpFile);
     }
+
+
+
+//    public static com.elad.wpmcn.MyPair readBinAvroFileGenericReader(File refFileToRead, String schemeFile) throws IOException {
+//        FileReader<com.elad.wpmcn.MyPair> reader = null;
+//        try{
+//            Schema oldCchema = new Schema.Parser().parse(AvroUtils.class.getResourceAsStream(schemeFile));// Deserialize it.
+//            System.out.println("Old scheme: "+ oldCchema);
+//            reader = DataFileReader.openReader(refFileToRead, new GenericDatumReader<>(oldCchema, SCHEMA$));
+//            com.elad.wpmcn.MyPair result = reader.next();
+//            System.out.printf("Left: %s, Right: %s\n, scheme: %s\n", result.left, result.right, result.getSchema());
+//            return  result;
+//
+//        } finally {
+//            if(reader!=null) reader.close();
+//        }
+//
+//    }
+
 
 
 
