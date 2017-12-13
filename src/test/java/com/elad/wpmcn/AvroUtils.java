@@ -70,7 +70,7 @@ public class AvroUtils {
     public static void createFile(com.elad.wpmcn.MyPair datum,String directory, String fileName) throws IOException {
         Path path = Paths.get(directory, fileName) ;
         Path tmpFile = null;
-        if(!Files.isReadable(path)){
+        if(!Files.exists(path)){
             tmpFile = Files.createFile(path);
             System.out.println("Create a file " + path.getFileName());
         } else {
