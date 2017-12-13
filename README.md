@@ -1,6 +1,7 @@
 Avro Example
 ============
-This is a basic example of how to use Avro in Java. It serializes and deserializes a pair of strings.
+This is a basic example of how to use Avro in Java. It serializes and deserialize a pair
+ of strings.
 
 exercise 1
 ==========
@@ -17,6 +18,9 @@ exercise 1
         {"name": "right", "type": "string"}
     ]
 }
+
+compile the project.
+
 
 2. write a stream as GenericRecord
   
@@ -42,3 +46,26 @@ java.lang.ClassCastException: org.apache.avro.util.Utf8 cannot be cast to java.l
 
 In order to solve it you should use the toString(), meaning myPair.getRight().toString()
 same issue also happen when using a generic record and result.get("left").
+
+ex2 - add new field
+===================
+1. using MyPairVer2.avsc we now have additional field: isValid
+
+{
+    "namesapce": "com.elad",
+    "type": "record",
+    "name": "com.elad.wpmcn.MyPair",
+    "doc": "A pair of strings",
+    "fields": [
+        {"name": "left", "type": "string"},
+        {"name": "right", "type": "string"},
+        {"name": "isValid", "type": ["null", "string"],"default": null}
+    ]
+}
+
+2. compile the project using the new scheme
+run all tests - all pass.
+(I've update the constructor to have addtional "true" var)
+
+
+
