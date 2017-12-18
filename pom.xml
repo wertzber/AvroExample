@@ -42,7 +42,7 @@
 						</goals>
 						<configuration>
 							<includes>
-								<include>MyPairVer1.avsc</include>
+								<include>MyPairVer2-bad.avsc</include>
 							</includes>
 							<sourceDirectory>src/main/resources/schemes/</sourceDirectory>
 						</configuration>

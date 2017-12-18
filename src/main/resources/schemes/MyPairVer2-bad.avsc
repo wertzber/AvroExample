@@ -1,0 +1,11 @@
+{
+    "namesapce": "com.elad",
+    "type": "record",
+    "name": "com.elad.wpmcn.MyPair",
+    "doc": "A pair of strings",
+    "fields": [
+        {"name": "left", "type": "string"},
+        {"name": "right", "type": "string"},
+        {"name": "isValid", "type": "string"}
+    ]
+}

@@ -72,17 +72,19 @@ public class AvroUtils {
         Path tmpFile = null;
         if(!Files.exists(path)){
             tmpFile = Files.createFile(path);
+            // Serialize it.
+            DataFileWriter<com.elad.wpmcn.MyPair> writer = new DataFileWriter<com.elad.wpmcn.MyPair>
+                    (new SpecificDatumWriter<com.elad.wpmcn.MyPair>(com.elad.wpmcn.MyPair.class));
+            writer.create(SCHEMA$, tmpFile.toFile()); //use the built in scheme
+            writer.append(datum);
+            writer.close();
             System.out.println("Create a file " + path.getFileName());
         } else {
             tmpFile = path;
+            System.out.println("file already exists"  + tmpFile.getFileName());
+
         }
-        // Serialize it.
-        DataFileWriter<com.elad.wpmcn.MyPair> writer = new DataFileWriter<com.elad.wpmcn.MyPair>
-                (new SpecificDatumWriter<com.elad.wpmcn.MyPair>(com.elad.wpmcn.MyPair.class));
-        writer.create(SCHEMA$, tmpFile.toFile()); //use the built in scheme
-        writer.append(datum);
-        writer.close();
-        System.out.println("Serialization: " + tmpFile);
+
     }
 
 
