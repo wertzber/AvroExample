@@ -1,11 +1,14 @@
 Avro Example
 ============
-This is a basic example of how to use Avro in Java. It serializes and deserializes a pair of strings.
+This is a basic example of how to use Avro in Java. 
+It serializes and deserialize a pair object.
 
 exercise 1
 ==========
+
+
 1. create an avro scheme: MyPairVer1
-   change 
+it has two fields(type String)  
 
 {
     "namesapce": "com.elad",
@@ -17,6 +20,8 @@ exercise 1
         {"name": "right", "type": "string"}
     ]
 }
+
+run maven clean and compile - in order to create an object MyPair.
 
 2. write a stream as GenericRecord
   
