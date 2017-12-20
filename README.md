@@ -65,7 +65,8 @@ ex2 - add new field
 
 2. compile the project using the new scheme
 run all tests - all pass.
-(I've update the constructor to have addtional "true" var)
+(I've update the constructor to have additional "true" var)
 
+3. run same tests - all should pass
 
 
