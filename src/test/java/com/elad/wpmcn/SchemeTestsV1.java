@@ -49,6 +49,7 @@ public class SchemeTestsV1 {
         System.out.println("right:" + genericRecord.get("right") + ",left:" + genericRecord.get("left"));
         Assert.assertTrue("failed to get right", "right".equalsIgnoreCase((String) genericRecord.get("right").toString()));
         Assert.assertTrue("failed to get left", "left".equalsIgnoreCase((String) genericRecord.get("left").toString()));
+        Assert.assertNull("failed to get isValid",  genericRecord.get("isValid"));
 
 
         System.out.println("Use MyPair and SpecificDatumReader to deserialize");
@@ -57,6 +58,7 @@ public class SchemeTestsV1 {
         System.out.println("right:" + specificRecord.getRight() + ",left:" + specificRecord.getLeft());
         Assert.assertTrue("failed to get right", "right".equalsIgnoreCase((String) specificRecord.getRight().toString()));
         Assert.assertTrue("failed to get left", "left".equalsIgnoreCase((String) specificRecord.getLeft().toString()));
+        Assert.assertNull("failed to get isValid null", specificRecord.getIsValid());
 
     }
 
@@ -83,6 +85,7 @@ public class SchemeTestsV1 {
         System.out.println("right:" + genericRecord.get("right") + ",left:" + genericRecord.get("left"));
         Assert.assertTrue("failed to get right", "right".equalsIgnoreCase((String) genericRecord.get("right").toString()));
         Assert.assertTrue("failed to get left", "left".equalsIgnoreCase((String) genericRecord.get("left").toString()));
+        Assert.assertNull("failed to get isValid",  genericRecord.get("isValid"));
 
 
         System.out.println("Use MyPair and SpecificDatumReader to deserialize");
@@ -91,6 +94,7 @@ public class SchemeTestsV1 {
         System.out.println("right:" + specificRecord.getRight() + ",left:" + specificRecord.getLeft());
         Assert.assertTrue("failed to get right", "right".equalsIgnoreCase((String) specificRecord.getRight().toString()));
         Assert.assertTrue("failed to get left", "left".equalsIgnoreCase((String) specificRecord.getLeft().toString()));
+        Assert.assertNull("failed to get isValid null", specificRecord.getIsValid());
 
     }
 
@@ -99,11 +103,11 @@ public class SchemeTestsV1 {
      * @throws IOException
      */
     @Test
-    public void createFileUsingGenericRecordV1ReadUsingGenericAndSpecific() throws IOException {
+    public void createFileV2() throws IOException {
 
         System.out.println("write to file");
         com.elad.wpmcn.MyPair myPair = new com.elad.wpmcn.MyPair("left","right","true");
-        AvroUtils.createFile(myPair, "/Users/eladw/git-dp/AvroExample/src/main/resources/output/ex1", "MyPairOutput-V1.bin");
+        AvroUtils.createFile(myPair, "/Users/eladw/git-dp/AvroExample/src/main/resources/output/ex2", "MyPairOutput-V2.bin");
         System.out.println("write stream");
     }
 
@@ -122,6 +126,8 @@ public class SchemeTestsV1 {
 
         Assert.assertTrue("failed to get right", "right".equalsIgnoreCase((String) result.getRight().toString()));
         Assert.assertTrue("failed to get left", "left".equalsIgnoreCase((String) result.getLeft().toString()));
+        Assert.assertNull("failed to get isValid null", result.getIsValid());
+
     }
 
     @Test
@@ -138,12 +144,10 @@ public class SchemeTestsV1 {
 
         Assert.assertTrue("failed to get right", "right".equalsIgnoreCase((String) result.get("right").toString()));
         Assert.assertTrue("failed to get left", "left".equalsIgnoreCase((String) result.get("left").toString()));
+        Assert.assertNull("failed to get isValid null", result.get("isValid"));
+        Assert.assertNull("failed to get isValid null", result.get("krkrkrkrk"));
+
     }
-
-
-
-
-
 
 
 }

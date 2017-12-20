@@ -69,4 +69,9 @@ run all tests - all pass.
 
 3. run same tests - all should pass
 
-
+when running v1 tests for read file:
+ - also as generic try to read isValid - and you recv null.
+   same behaviour will happen when calling variable which does not exists.
+   
+   Assert.assertNull("failed to get isValid null", result.get("isValid"));
+   Assert.assertNull("failed to get isValid null", result.get("krkrkrkrk"));
