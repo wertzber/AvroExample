@@ -25,6 +25,7 @@ import static com.elad.wpmcn.MyPair.SCHEMA$;
 public class SchemeTestsV1 {
 
     /**
+     * orig data was written as generic record
      * MyPair v1 has 2 fields: right and left
      * Write stream using generic record.
      * read stream using: a.generic record  b.specificReader
@@ -61,6 +62,7 @@ public class SchemeTestsV1 {
     }
 
     /**
+     * origh data was written as specific record
      * MyPair v1 has 2 fields: right and left
      * Write stream using specific writer.
      * read stream using: a.generic record  b.specificReader
