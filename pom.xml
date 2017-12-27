@@ -17,7 +17,7 @@
 		<dependency>
 			<groupId>org.apache.avro</groupId>
 			<artifactId>avro</artifactId>
-			<version>1.7.3</version>
+			<version>1.8.2</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -42,7 +42,7 @@
 						</goals>
 						<configuration>
 							<includes>
-								<include>MyPairVer2.avsc</include>
+								<include>MyPairVer3.avsc</include>
 							</includes>
 							<sourceDirectory>src/main/resources/schemes/</sourceDirectory>
 						</configuration>
@@ -52,6 +52,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
 				<inherited>true</inherited>
 				<configuration>
 					<source>1.8</source>

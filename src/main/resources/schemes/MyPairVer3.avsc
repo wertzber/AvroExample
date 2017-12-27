@@ -11,7 +11,7 @@
                         "type": "enum",
                         "name": "GirlName",
                         "doc": "`YUVAL`: good name",
-                        "symbols": ["YUVAL", "NOA", "BABY"]
+                        "symbols": ["YUVAL", "NOA", "BABY", null]
                       }
         }
     ]
