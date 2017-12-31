@@ -7,12 +7,13 @@
         {"name": "left", "type": "string"},
         {"name": "right", "type": "string"},
         {"name": "isValid", "type": ["null", "string"],"default": null},
-        {"name": "nameOfGirl", "type": {
+        {"name": "nameOfGirl", "type":["null", {
                         "type": "enum",
                         "name": "GirlName",
                         "doc": "`YUVAL`: good name",
-                        "symbols": ["YUVAL", "NOA", "BABY", null]
-                      }
+                        "symbols": ["YUVAL", "NOA", "BABY"]
+
+                   }],"default":null
         }
     ]
 }

@@ -42,7 +42,6 @@ public class SchemeTestsV2 {
         Assert.assertTrue("failed to get right", "right".equalsIgnoreCase((String) result.getRight().toString()));
         Assert.assertTrue("failed to get left", "left".equalsIgnoreCase((String) result.getLeft().toString()));
         Assert.assertTrue("failed to get isValid ", "true".equalsIgnoreCase(result.getIsValid().toString()));
-        Assert.assertTrue("failed to get nameOfGirl ", "YUVAL".equalsIgnoreCase(result.getNameOfGirl().toString()));
 
     }
 
