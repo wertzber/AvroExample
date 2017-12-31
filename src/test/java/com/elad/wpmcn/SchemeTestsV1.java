@@ -27,7 +27,7 @@ public class SchemeTestsV1 {
     /**
      * orig data was written as generic record
      * MyPair v1 has 2 fields: right and left
-     * Write stream using generic record.
+     *
      * read stream using: a.generic record  b.specificReader
      * @throws IOException
      */
@@ -64,8 +64,9 @@ public class SchemeTestsV1 {
     /**
      * origh data was written as specific record
      * MyPair v1 has 2 fields: right and left
-     * Write stream using specific writer.
+     *
      * read stream using: a.generic record  b.specificReader
+     * you can see from both tests it does not mattre how you write the dta.
      * @throws IOException
      */
     @Test
@@ -73,7 +74,7 @@ public class SchemeTestsV1 {
 
         Schema schema = new Schema.Parser().parse(getClass().getResourceAsStream("/schemes/MyPairVer1.avsc"));// Deserialize it.
         System.out.println("Use Specific object and DatumWriter");
-        com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair("left", "right");
+        com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair("left", "right"); //BAD USE !!!!! pls use a builder !!!!!!!!!!!!!!!!!!
         SpecificDatumWriter<com.elad.wpmcn.MyPair> writer = new SpecificDatumWriter<>(schema);
         final ByteArrayOutputStream byteArrayStream = AvroUtils.serializeCreateByteStreamUsingDatumWriter(datum, writer);
 
