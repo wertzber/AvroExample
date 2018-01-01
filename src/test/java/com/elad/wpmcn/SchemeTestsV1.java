@@ -98,7 +98,7 @@ public class SchemeTestsV1 {
      * Create a file using a genericRecord
      * @throws IOException
      */
-    @Test
+    //@Test
     public void createFileUsingGenericRecordV1ReadUsingGenericAndSpecific() throws IOException {
 
         System.out.println("write to file");
