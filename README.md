@@ -52,7 +52,7 @@ ex2 - add new field
 1. using MyPairVer2.avsc we now have additional field: isValid
 
 {
-    "namesapce": "com.elad",
+    "namespace": "com.elad",
     "type": "record",
     "name": "com.elad.wpmcn.MyPair",
     "doc": "A pair of strings",

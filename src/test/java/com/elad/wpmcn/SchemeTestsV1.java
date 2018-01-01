@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import static com.elad.wpmcn.MyPair.SCHEMA$;
 
+
 /**
  * Created by eladw on 11/29/17.
  */
@@ -73,7 +74,14 @@ public class SchemeTestsV1 {
 
         Schema schema = new Schema.Parser().parse(getClass().getResourceAsStream("/schemes/MyPairVer1.avsc"));// Deserialize it.
         System.out.println("Use Specific object and DatumWriter");
-        com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair("left", "right", "true");
+
+        /** Use the builder !!!!!!!!!!!!!!!!!!!!!! **/
+        com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair().newBuilder()
+                .setLeft("left")
+                .setRight("right")
+                .build();
+
+        //com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPairB();
         SpecificDatumWriter<com.elad.wpmcn.MyPair> writer = new SpecificDatumWriter<>(schema);
         final ByteArrayOutputStream byteArrayStream = AvroUtils.serializeCreateByteStreamUsingDatumWriter(datum, writer);
 
@@ -97,20 +105,6 @@ public class SchemeTestsV1 {
         Assert.assertNull("failed to get isValid null", specificRecord.getIsValid());
 
     }
-
-    /**
-     * Create a file using a genericRecord
-     * @throws IOException
-     */
-    @Test
-    public void createFileV2() throws IOException {
-
-        System.out.println("write to file");
-        com.elad.wpmcn.MyPair myPair = new com.elad.wpmcn.MyPair("left","right","true");
-        AvroUtils.createFile(myPair, "/Users/eladw/git-dp/AvroExample/src/main/resources/output/ex2", "MyPairOutput-V2.bin");
-        System.out.println("write stream");
-    }
-
 
     @Test
     public void readFileUsingSpecificDatumReader() throws IOException {
@@ -148,6 +142,8 @@ public class SchemeTestsV1 {
         Assert.assertNull("failed to get isValid null", result.get("krkrkrkrk"));
 
     }
+
+
 
 
 }
