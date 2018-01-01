@@ -75,3 +75,5 @@ when running v1 tests for read file:
    
    Assert.assertNull("failed to get isValid null", result.get("isValid"));
    Assert.assertNull("failed to get isValid null", result.get("krkrkrkrk"));
+
+pls use the builder....instead of constructor
