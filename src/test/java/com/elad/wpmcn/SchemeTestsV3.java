@@ -1,12 +1,7 @@
 package com.elad.wpmcn;
 
 import org.apache.avro.Schema;
-import org.apache.avro.file.DataFileReader;
-import org.apache.avro.file.FileReader;
-import org.apache.avro.generic.GenericData;
-import org.apache.avro.generic.GenericDatumReader;
-import org.apache.avro.generic.GenericDatumWriter;
-import org.apache.avro.generic.GenericRecord;
+import org.apache.avro.generic.*;
 import org.apache.avro.io.DatumWriter;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
@@ -14,10 +9,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 
-import static com.elad.wpmcn.MyPair.SCHEMA$;
+import static com.elad.wpmcn.GirlName.YUVAL;
+
 
 /**
  * Created by eladw on 11/29/17.
@@ -33,7 +28,13 @@ public class SchemeTestsV3 {
     public void createFileV3() throws IOException {
 
         System.out.println("write to file");
-        com.elad.wpmcn.MyPair myPair = new com.elad.wpmcn.MyPair("left","right","true", com.elad.wpmcn.GirlName.YUVAL);
+        com.elad.wpmcn.MyPair myPair = new com.elad.wpmcn.MyPair().newBuilder()
+                .setLeft("left")
+                .setRight("right")
+                .setIsValid("true")
+                .setNameOfGirl(YUVAL)
+                .build();
+                //.set, com.elad.wpmcn.GirlName.YUVAL);
         AvroUtils.createFile(myPair, "/Users/eladw/git-dp/AvroExample/src/main/resources/output/ex3", "MyPairOutput-V3.bin");
         System.out.println("write stream");
     }
@@ -54,6 +55,8 @@ public class SchemeTestsV3 {
         datum.put("left", new String("left"));
         datum.put("right", new String("right"));
         datum.put("isValid", new String("true"));
+        //GenericEnumSymbol enumSymbol = new GenericData.EnumSymbol(schema.getField("nameOfGirl").schema().getTypes().get(1), YUVAL.toString());
+
         datum.put("nameOfGirl", com.elad.wpmcn.GirlName.YUVAL);
 
         DatumWriter<GenericRecord> writer = new GenericDatumWriter<GenericRecord>(schema);
@@ -93,7 +96,13 @@ public class SchemeTestsV3 {
 
         Schema schema = new Schema.Parser().parse(getClass().getResourceAsStream("/schemes/MyPairVer3.avsc"));// Deserialize it.
         System.out.println("Use Specific object and DatumWriter");
-        com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair("left", "right", "true", com.elad.wpmcn.GirlName.YUVAL);
+        //wrong !!!!!! com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair("left", "right", "true", com.elad.wpmcn.GirlName.YUVAL);
+        com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair().newBuilder()
+                .setLeft("left")
+                .setRight("right")
+                .setIsValid("true")
+                .setNameOfGirl(YUVAL)
+                .build();
         SpecificDatumWriter<com.elad.wpmcn.MyPair> writer = new SpecificDatumWriter<>(schema);
         final ByteArrayOutputStream byteArrayStream = AvroUtils.serializeCreateByteStreamUsingDatumWriter(datum, writer);
 

@@ -27,6 +27,7 @@ import static com.elad.wpmcn.MyPair.SCHEMA$;
  */
 public class AvroUtils {
 
+
     /**
      * Serialize and create stream using genericDatumReader
      * @param datum
@@ -44,6 +45,8 @@ public class AvroUtils {
             System.out.println("input: " + datum + ", after Serialization: " + out);
             return out;
         } catch (Exception e){
+            System.out.println("Error serialize " + e);
+            e.printStackTrace();
             out.close();
             return  null;
         }
@@ -55,6 +58,8 @@ public class AvroUtils {
         try{
             return reader.read(null, decoder);
         } catch (Exception e){
+            System.out.println("Error deserialize " + e);
+            e.printStackTrace();
             out.close();
             return  null;
         }

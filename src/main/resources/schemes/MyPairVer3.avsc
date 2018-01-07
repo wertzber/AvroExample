@@ -1,5 +1,5 @@
 {
-    "namesapce": "com.elad",
+    "namespace": "com.elad",
     "type": "record",
     "name": "com.elad.wpmcn.MyPair",
     "doc": "A pair of strings",
@@ -10,10 +10,10 @@
         {"name": "nameOfGirl", "type":["null", {
                         "type": "enum",
                         "name": "GirlName",
-                        "doc": "`YUVAL`: good name",
+                        "doc": "YUVAL: good name",
                         "symbols": ["YUVAL", "NOA", "BABY"]
 
-                   }],"default":null
+                   }],"default":"null"
         }
     ]
 }
