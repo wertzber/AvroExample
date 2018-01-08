@@ -6,7 +6,7 @@
     "fields": [
         {"name": "left", "type": "string"},
         {"name": "right", "type": "string"},
-        {"name": "isValid", "type": ["null", "string"],"default": null},
+        {"name": "isValid", "type": ["null", "boolean"],"default": false},
         {"name": "nameOfGirl", "type":["null", {
                         "type": "enum",
                         "name": "GirlName",

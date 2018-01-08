@@ -19,27 +19,6 @@ import static com.elad.wpmcn.GirlName.YUVAL;
  */
 public class SchemeTestsV3 {
 
-
-    /**
-     * Create a file using a genericRecord
-     * @throws IOException
-     */
-    @Test
-    public void createFileV3() throws IOException {
-
-        System.out.println("write to file");
-        com.elad.wpmcn.MyPair myPair = new com.elad.wpmcn.MyPair().newBuilder()
-                .setLeft("left")
-                .setRight("right")
-                .setIsValid("true")
-                .setNameOfGirl(YUVAL)
-                .build();
-                //.set, com.elad.wpmcn.GirlName.YUVAL);
-        AvroUtils.createFile(myPair, "/Users/eladw/git-dp/AvroExample/src/main/resources/output/ex3", "MyPairOutput-V3.bin");
-        System.out.println("write stream");
-    }
-
-
     /**
      * MyPair v1 has 2 fields: right and left
      * Write stream using generic record.
@@ -55,9 +34,9 @@ public class SchemeTestsV3 {
         datum.put("left", new String("left"));
         datum.put("right", new String("right"));
         datum.put("isValid", new String("true"));
-        //GenericEnumSymbol enumSymbol = new GenericData.EnumSymbol(schema.getField("nameOfGirl").schema().getTypes().get(1), YUVAL.toString());
+        GenericEnumSymbol enumSymbol = new GenericData.EnumSymbol(schema.getField("nameOfGirl").schema().getTypes().get(1), YUVAL.toString());
 
-        datum.put("nameOfGirl", com.elad.wpmcn.GirlName.YUVAL);
+        datum.put("nameOfGirl", enumSymbol);
 
         DatumWriter<GenericRecord> writer = new GenericDatumWriter<GenericRecord>(schema);
         final ByteArrayOutputStream byteArrayStream = AvroUtils.serializeCreateByteStreamUsingDatumWriter(datum, writer);
@@ -100,7 +79,7 @@ public class SchemeTestsV3 {
         com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair().newBuilder()
                 .setLeft("left")
                 .setRight("right")
-                .setIsValid("true")
+                .setIsValid(true)
                 .setNameOfGirl(YUVAL)
                 .build();
         SpecificDatumWriter<com.elad.wpmcn.MyPair> writer = new SpecificDatumWriter<>(schema);
