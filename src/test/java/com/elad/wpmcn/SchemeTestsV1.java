@@ -11,6 +11,7 @@ import org.apache.avro.io.DatumWriter;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -101,6 +102,7 @@ public class SchemeTestsV1 {
      * Create a file using a genericRecord
      * @throws IOException
      */
+    @Ignore
     @Test
     public void createFileUsingGenericRecordV1ReadUsingGenericAndSpecific() throws IOException {
 
