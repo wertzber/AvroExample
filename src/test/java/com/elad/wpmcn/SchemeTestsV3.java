@@ -6,6 +6,7 @@ import org.apache.avro.io.DatumWriter;
 import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.avro.specific.SpecificDatumWriter;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
@@ -25,6 +26,7 @@ public class SchemeTestsV3 {
      * @throws IOException
      */
     @Test
+    @Ignore
     public void createFileV3() throws IOException {
 
         System.out.println("write to file");
@@ -55,9 +57,9 @@ public class SchemeTestsV3 {
         datum.put("left", new String("left"));
         datum.put("right", new String("right"));
         datum.put("isValid", new String("true"));
-        //GenericEnumSymbol enumSymbol = new GenericData.EnumSymbol(schema.getField("nameOfGirl").schema().getTypes().get(1), YUVAL.toString());
+        GenericEnumSymbol enumSymbol = new GenericData.EnumSymbol(schema.getField("nameOfGirl").schema().getTypes().get(1), YUVAL.toString());
 
-        datum.put("nameOfGirl", com.elad.wpmcn.GirlName.YUVAL);
+        datum.put("nameOfGirl", enumSymbol);
 
         DatumWriter<GenericRecord> writer = new GenericDatumWriter<GenericRecord>(schema);
         final ByteArrayOutputStream byteArrayStream = AvroUtils.serializeCreateByteStreamUsingDatumWriter(datum, writer);
