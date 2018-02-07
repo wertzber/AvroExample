@@ -71,7 +71,7 @@ public class SchemeTestsV1 {
 
         Schema schema = new Schema.Parser().parse(getClass().getResourceAsStream("/schemes/MyPairVer1.avsc"));// Deserialize it.
         System.out.println("Use Specific object and DatumWriter");
-        com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair("left", "right", "true");
+        com.elad.wpmcn.MyPair datum = new com.elad.wpmcn.MyPair("left", "right", "true"); //BAD example !!!!!!
         SpecificDatumWriter<com.elad.wpmcn.MyPair> writer = new SpecificDatumWriter<>(schema);
         final ByteArrayOutputStream byteArrayStream = AvroUtils.serializeCreateByteStreamUsingDatumWriter(datum, writer);
 
