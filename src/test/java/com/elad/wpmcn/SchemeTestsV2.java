@@ -35,7 +35,11 @@ public class SchemeTestsV2 {
     public void createFileV2() throws IOException {
 
         System.out.println("write to file");
-        MyPair myPair = new MyPair("left","right","true");
+        MyPair myPair = MyPair.newBuilder() //Good example
+                .setLeft("left")
+                .setRight("right")
+                .setIsValid("true")
+                .build();
         AvroUtils.createFile(myPair, "/Users/eladw/git-dp/AvroExample/src/main/resources/output/ex2", "MyPairOutput-V2.bin");
         System.out.println("write stream");
     }
