@@ -47,3 +47,20 @@ java.lang.ClassCastException: org.apache.avro.util.Utf8 cannot be cast to java.l
 
 In order to solve it you should use the toString(), meaning myPair.getRight().toString()
 same issue also happen when using a generic record and result.get("left").
+
+exercise 2
+==========
+create a new field in a good way
+
+exercise 2b
+==========
+crteate a new field in a way the schem is broken
+
+exercise 3
+==========
+Add enum
+
+exercise 4
+==========
+update a field type.
+
